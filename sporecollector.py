@@ -7,19 +7,23 @@ import sys
 import threading
 
 def ledcam():
+
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(11, GPIO.OUT)
     with picamera.PiCamera() as camera:
-        os.chdir ("/home/pi/trailcam")
+        os.chdir ("/home/pi/Documents/sporecollector/trailcam")
         camera.start_preview()
 
         try:
-            for i, filename in enumerate(camera.capture_continuous('image{counter:03d}.jpg')):
+            # for i, filename in enumerate(camera.capture_continuous('image{counter:03d}.jpg')):
+            for i, filename in enumerate(camera.capture_continuous('image{timestamp:%04Y%02m%02d_%02H-%02M-%02S}.jpg')): # JH - add a timestamp to the image filename
                 print(filename)
                 GPIO.output(11,False)
                 time.sleep(5)
                 GPIO.output(11, True)
-                if i == 20:
+                uploadCmd = '/home/pi/Documents/sporecollector/client_upload.sh '+filename     # JH - prepare the call to the upload-script with the image-filename
+                os.system(uploadCmd)                                                           # JH - execute the upload script from the os
+                if i == 1000:
                     break
         finally:
             camera.stop_preview()
@@ -37,9 +41,8 @@ def measurmentprocess():
     print(' ASLPS        SLPS        Volts        Time ' )
     print('Total L     [Ltr/s]        [V]         [sec]  ')
     print('-' *45  )
-    import os
-    z=0
     kha=0
+    z=0
     while True:
         values = [0]*1
         if z<=5:
@@ -47,7 +50,7 @@ def measurmentprocess():
                 total=0
                 for j in range(1,301):
                     values[i] = adc.read_adc(i, gain=GAIN, data_rate=860)
-               	    y=(values[i]*0.000187505)
+                    y=(values[i]*0.000187505)
                     total+=y
                     if j%300==0:
                         avg=total/300
@@ -66,8 +69,8 @@ t1.start()
 
 
 if __name__== '__main__':
-    measurmentprocess()
-
-
-
-
+    try:
+        measurmentprocess()
+    except KeyboardInterrupt:
+        print ("keyboardinterrupt")
+        GPIO.cleanup()
