@@ -6,6 +6,19 @@ import RPi.GPIO as GPIO
 import sys
 import threading
 
+import signal
+
+def sigterm_handler(signal, frame):
+    # this method defines the handler i.e. what to do
+    # when you receive a SIGTERM
+    print "recieved sigterm signal"
+    GPIO.cleanup()
+    sys.exit()
+    pass
+
+signal.signal(signal.SIGTERM, sigterm_handler)
+
+
 def ledcam():
 
     GPIO.setmode(GPIO.BOARD)
