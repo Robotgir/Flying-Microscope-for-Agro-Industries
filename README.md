@@ -1,5 +1,5 @@
 # Flying Microscope (SPECTORS)
-
+This repo contains hardware and software details for the spore collector device which can be remotely controlled via Spectors Cockpit. Live image can be acessed on Spectors Cockpit.
 ## code 
 contains main script file named sporecollector1.py and its dependensies
 ### noteson_code.docx 
@@ -35,4 +35,3 @@ Images obtained from the measurment process
 
 
 
-This software is for remote control via Spectors Cockpit and live image upload
