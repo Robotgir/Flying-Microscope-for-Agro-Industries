@@ -13,16 +13,16 @@ contais system chart (yet to come)
 ## Hardware
 ### camera_sieveholderassembly
 contains priliminary and current designs for the spore collector device
+### PCB (RPI HAT)
+ contains Eagle board and schematic files for the PCB design
 ### productdata sheets
 contain all the hardware components datasheets
-### PCB (RPI HAT)
-PCB_designEagle contains Eagle board and schematic files for the PCB design
 #### PCB_connection_notes.docx 
 contains details of how to setup the PCB AS Rpi-hat, connections with other components.
 
 ## spore collection images
 Images obtained from the measurment process
-<img src="/spore collection images/image023.png">
+<img src="/spore collection images/image023.jpg">
 
 
 ## PCB as Rpi-hat
