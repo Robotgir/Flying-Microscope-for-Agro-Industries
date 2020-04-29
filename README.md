@@ -25,8 +25,8 @@ Images obtained from the measurment process
 <img src="/spore collection images/image023.jpg">
 
 
-## PCB as Rpi-hat
-<img src="/Hardware/PCB_designEagle/shield_sporecollector v4.png">
+## PCB-Rpi-hat
+<img src="/Hardware/PCB (RPI HAT)/shield_sporecollector v4.png">
 
 
 
